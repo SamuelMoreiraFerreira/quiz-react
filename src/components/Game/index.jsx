@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import questions from '../../data/questions';
 import QuestionCard from '../QuestionCard';
+import ScoreBoard from '../ScoreBoard';
 
 export default function Game ()
 {
 
-    const [currentQuestion, setCurrentQuestion] = useState(1);
+    const [currentQuestion, setCurrentQuestion] = useState(0);
     const question = questions[currentQuestion];
 
     const [answers, setAnswer] = useState([]);
-
 
     function handleAnswer (question, answer, timer)
     {
@@ -35,15 +35,35 @@ export default function Game ()
     return (
 
         <>
-            <header>
-                <label></label>
-            </header>
+            {
+                currentQuestion - 1 > questions.legnth 
 
-            <QuestionCard
-                question={question.text}
-                options={question.options}
-                callbackAnswer={handleAnswer}
-            />
+                ?
+
+                //#region ScoreBoard
+
+                <ScoreBoard />
+
+                //#endregion
+
+                :
+
+                //#region Perguntas
+
+                <>
+                    <header>
+                        <label>oi</label>
+                    </header>
+
+                    <QuestionCard
+                        question={question.text}
+                        options={question.options}
+                        callbackAnswer={handleAnswer}
+                    />
+                </>
+
+                //#endregion
+            }
         </>
 
     );
