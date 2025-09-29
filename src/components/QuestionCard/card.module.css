@@ -13,10 +13,35 @@
 
 .cardHeader
 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
     width: 100%;
     height: 10%;
 
+    padding: 0 5%;
+
     background-color: royalblue;
+    color: #FFF;
     
     border-bottom: 2px solid #000;
+}
+
+.cardOptions
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardOption button
+{
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 10px 10%;
 }

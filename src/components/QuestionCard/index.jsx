@@ -33,31 +33,28 @@ export default function QuestionCard ({ question, options, callbackAnswer })
 
             <h2 className={styles.cardQuestion}>{question}</h2>
 
-            <form>
-                {
-                    options.map((option, index) => {
+            <ul className={styles.cardOptions}>
+            {
+                options.map((option, index) => {
 
-                        return (
+                    return (
 
-                            <div>
-                                <button 
-                                    onClick={() => {
-                                        callbackAnswer(index)
-                                    }}
-                                >
-                                    <label>{optionsMark[index]}</label>
-                                    <label>{option}</label>
-                                </button>
-                            </div>
+                        <li className={styles.cardOption}>
+                            <button 
+                                onClick={() => {
+                                    callbackAnswer(index)
+                                }}
+                            >
+                                <label>{optionsMark[index]}</label>
+                                <label>{option}</label>
+                            </button>
+                        </li>
 
-                        );
+                    );
 
-                    })
-                }
-
-                <button type='submit'>Próximo</button>
-
-            </form>
+                })
+            }
+            </ul>
 
         </article>
 
