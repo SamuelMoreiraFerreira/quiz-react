@@ -52,7 +52,7 @@ export default function Game() {
           <QuestionCard
             key={currentQuestion}
             questionIndex={currentQuestion}
-            question={questions[currentQuestion].question}   
+            question={questions[currentQuestion].text}   
             options={questions[currentQuestion].options}
             callbackAnswer={handleAnswer}
             durationMs={0.25 * 60 * 1000} 
