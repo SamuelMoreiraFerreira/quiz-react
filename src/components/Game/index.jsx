@@ -2,70 +2,63 @@ import { useState } from 'react';
 import questions from '../../data/questions';
 import QuestionCard from '../QuestionCard';
 import ScoreBoard from '../ScoreBoard';
+import styles from './game.module.css';
 
-export default function Game ()
-{
+export default function Game() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState([]);
 
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const question = questions[currentQuestion];
+  function handleAnswer(questionIndex, answerIndex, timerMs, points) {
+    const q = questions[questionIndex];
+    const correctIndex = q.options.indexOf(q.answer); 
+    const selectedText = answerIndex === -1 ? null : q.options[answerIndex];
 
-    const [answers, setAnswer] = useState([]);
+    setAnswers(prev => [
+      ...prev,
+      {
+        question: q.question,          
+        answer: answerIndex,           
+        selectedText,                  
+        timer: timerMs,
+        points,
+        correctAnswer: q.answer,       
+        correctIndex                   
+      }
+    ]);
 
-    function handleAnswer (question, answer, timer)
-    {
+    setCurrentQuestion(prev => prev + 1);
+  }
 
-        setAnswer (
+  function handleReset() {
+    setCurrentQuestion(0);
+    setAnswers([]);
+  }
 
-            [
-                ...answers,
-
-                {
-                    question,
-                    timer,
-                    answer
-                }
-            ]
-
-        );
-
-        setCurrentQuestion(currentQuestion + 1);
-
-    }
-
-    return (
-
+  return (
+    <section>
+      {currentQuestion > questions.length - 1 ? (
         <>
-            {
-                currentQuestion - 1 > questions.legnth 
-
-                ?
-
-                //#region ScoreBoard
-
-                <ScoreBoard />
-
-                //#endregion
-
-                :
-
-                //#region Perguntas
-
-                <>
-                    <header>
-                        <label>oi</label>
-                    </header>
-
-                    <QuestionCard
-                        question={question.text}
-                        options={question.options}
-                        callbackAnswer={handleAnswer}
-                    />
-                </>
-
-                //#endregion
-            }
+          <ScoreBoard answers={answers} />
+          <div className={styles.controls}>
+            <button className={styles.retryBtn} onClick={handleReset}>Tentar Novamente</button>
+          </div>
         </>
+      ) : (
+        <>
+          <header className={styles.progressHeader}>
+            <label>{currentQuestion + 1}/{questions.length}</label>
+          </header>
 
-    );
-
+          <QuestionCard
+            key={currentQuestion}
+            questionIndex={currentQuestion}
+            question={questions[currentQuestion].question}   
+            options={questions[currentQuestion].options}
+            callbackAnswer={handleAnswer}
+            durationMs={0.25 * 60 * 1000} 
+          />
+        </>
+      )}
+    </section>
+  );
 }

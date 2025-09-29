@@ -1,0 +1,24 @@
+.progressHeader {
+  max-width: 900px;
+  margin: 0.5rem auto 1rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+  color: var(--card);
+}
+
+
+.controls {
+  text-align: center;
+  margin-top: 1rem
+}
+
+.retryBtn {
+  background: var(--accent);
+  color: #081020;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}

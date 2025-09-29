@@ -1,0 +1,19 @@
+.pageHeader {
+    background: linear-gradient(90deg, #071427, #0b2940);
+    color: white;
+    padding: 1.25rem 0;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+
+.pageHeader h1 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.subtitle {
+    margin: 0.35rem 0 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
